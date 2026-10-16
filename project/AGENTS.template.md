@@ -1,40 +1,43 @@
-# Правила проекта
+# Project rules
 
-Это шаблон: перед установкой адаптируй его по реальному репозиторию и задаче.
-Удали неприменимые разделы. Он дополняет личные правила, а не дублирует их.
-Не выдумывай команды, доступы и согласования; неизвестное помечай явно.
+This is a template: adapt it to the actual repository and task before installation.
+Remove sections that do not apply. It supplements personal rules rather than
+duplicating them. Do not invent commands, access, or approvals; explicitly mark
+anything unknown.
 
-## Назначение и источники
+## Purpose and sources
 
-Кратко опиши продукт и ожидаемый результат. Укажи существующие источники:
-общий README, runtime/архитектура, UI, данные и deployment.
-Уточни, что описывает требуемое поведение, а что является историческим отчётом.
+Briefly describe the product and expected outcome. Identify the existing sources:
+the main README, runtime/architecture, UI, data, and deployment documentation.
+Clarify which sources describe required behavior and which are historical reports.
 
-## Среда и проверка
+## Environment and verification
 
-Запиши реальные команды запуска, проверки и сборки из текущего проекта.
-Укажи, разрешён ли lifecycle контейнеров/общих сервисов, и где тестовые данные.
-Не копируй Docker/just/Next.js из исходных проектов, если здесь другой стек.
+Record the current project's actual commands for running, checking, and building it.
+State whether container/shared-service lifecycle operations are authorized and where
+test data is located. Do not copy Docker/just/Next.js from the source projects if this
+project uses a different stack.
 
-## Инварианты
+## Invariants
 
-Укажи собственные ограничения продукта, владельцев данных, shared UI,
-точность денежных данных при наличии и границы совместимости.
-Клиентские настройки и разрешения на их изменение укажи отдельно.
+Specify the product's own constraints, data owners, shared UI, precision of monetary
+data where applicable, and compatibility boundaries. Document customer settings and
+permissions to change them separately.
 
-## Поставка и разрешения
+## Delivery and permissions
 
-Зафиксируй действующие разрешения на commit, push, PR, merge и deployment,
-целевую ветку/окружение и явные запреты. Не переноси разрешения из другого проекта.
-Если они уже выданы в задаче, не запрашивай их повторно.
-При наличии production укажи runbook, проверки, backup и rollback по риску.
+Record the current permissions for commit, push, PR, merge, and deployment, the target
+branch/environment, and explicit prohibitions. Do not transfer permissions from
+another project. If they have already been granted in the task, do not ask for them
+again. If the project has a production environment, specify the runbook, checks,
+and risk-based backup and rollback requirements.
 
-## Подключаемые процедуры
+## Optional procedures
 
-Ссылки ниже добавляй только после установки соответствующих файлов и только
-для нужных областей; не оставляй ссылки на отсутствующие файлы.
+Add the references below only after installing the corresponding files and only
+for the relevant areas; do not leave references to missing files.
 
-- Для LLM-поведения: навык prompt-engineering.
-- Для аудита качества/стоимости и эффекта релиза: навык evidence-audit.
-- Для выпуска: локально принятый release-policy.md и конкретный runbook.
-- Для денег/webhook/ledger: money-events.md и локальный контракт.
+- For LLM behavior: the prompt-engineering skill.
+- For quality/cost audits and release impact: the evidence-audit skill.
+- For releases: the locally adopted release-policy.md and the specific runbook.
+- For money/webhooks/ledgers: money-events.md and the local contract.

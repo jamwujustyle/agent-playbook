@@ -1,64 +1,65 @@
 ---
 name: evidence-audit
-description: "Повторный аудит качества, эффекта релиза или расходов ИИ с сопоставимыми выборками и сохранением предыдущих выводов. Используй для live-аудита, before/after анализа и сравнения моделей; не для обычной проверки кода или сборки."
+description: "Repeat audits of quality, release effects, or AI costs using comparable samples while preserving earlier findings. Use for live audits, before-and-after analysis, and model comparisons; not for routine code or build checks."
 ---
 
-# Аудит с проверяемыми выводами
+# Audits with verifiable conclusions
 
-Начни с вопроса пользователя, последнего отчёта, исходного baseline и фактических
-релизов. Навык не предоставляет доступа к production, права отправлять приватные
-данные провайдеру, менять конфигурацию или тратить деньги. Используй уже действующую
-авторизацию; при её отсутствии подготовь методику и уточни только нужный доступ.
+Start with the user's question, the latest report, the original baseline, and actual
+releases. This skill does not grant production access or permission to send private
+data to a provider, change configuration, or spend money. Use existing authorization;
+if it is absent, prepare the methodology and clarify only the access needed.
 
-## Границы до просмотра результатов
+## Set boundaries before reviewing results
 
-- Задай точный период, часовой пояс, snapshot, продукты/аккаунты и критерии включения.
-  Проверь фактическую версию и время cutover; локальный код не объясняет production.
-- Заранее определи воспроизводимую ограниченную общую выборку и отдельно целевую
-  выборку прежних дефектов. Включай неудачи и отсутствующие результаты, не только успехи.
-- Сохраняй IDs проблем, прошлые симптомы, вмешательства и открытые зависимости.
-  Следующее окно продолжает исследование, а не обнуляет список проблем.
+- Define the exact period, time zone, snapshot, products or accounts, and inclusion criteria.
+  Verify the actual version and cutover time; local code does not explain production behavior.
+- Predefine a reproducible, bounded general sample and a separate sample targeting
+  earlier defects. Include failures and missing results, not only successes.
+- Preserve issue IDs, earlier symptoms, interventions, and unresolved dependencies.
+  The next window continues the investigation rather than resetting the issue list.
 
-## Проверка эффекта
+## Assessing effects
 
-- Сравнивай сопоставимые случаи: сценарий, стадия, язык, модальность и время суток,
-  когда это влияет на результат. Одинаковая длительность окон не делает их равными.
-- Разделяй входящее событие, попытку, authored-результат, доставку и recovery.
-  Позднее исправление не превращает первую неудачу в первый успешный ответ.
-  Отличай намеренную паузу от потери ответа; отмечай pending и неполные данные.
-- Учитывай соседние релизы, публикации владельца, provider-инциденты, cache и состав
-  трафика. При пересечении cutover фиксируй отдельно source/author/delivery timestamps.
-- Для каждого вмешательства выбери вывод: улучшение, дефект сохраняется,
-  регрессия, не встретились подходящие случаи или недостаточно данных.
-  Приведи числитель/знаменатель и пределы уверенности. Не приписывай причинность
-  одному наблюдаемому изменению без подходящего сравнения.
+- Compare like cases: scenario, stage, language, modality, and time of day
+  when these affect the result. Equal window lengths do not make them equivalent.
+- Separate the incoming event, attempt, authored result, delivery, and recovery.
+  A later correction does not turn an initial failure into a successful first response.
+  Distinguish an intentional pause from a lost response; mark pending and incomplete data.
+- Account for intervening releases, owner publications, provider incidents, caching, and traffic mix.
+  When a case crosses the cutover, record source, authoring, and delivery timestamps separately.
+- For each intervention, choose a conclusion: improvement, persisting defect,
+  regression, no eligible cases encountered, or insufficient evidence.
+  Give the numerator, denominator, and limits of confidence. Do not attribute causality
+  to an observed change without an appropriate comparison.
 
-Для повторного аудита ответов сохраняй рубрику: первый доставленный авторский
-пакет, полезный прогресс, опора на источники, непрерывность, заданный стиль,
-ссылки/медиа и pause/follow-up. Различай ошибки чтения источника, сборки контекста,
-авторства/валидации, доставки и клиентской политики.
+For repeat response audits, preserve the rubric: the first delivered authored
+batch, useful progress, source grounding, continuity, configured style,
+links or media, and pause or follow-up behavior. Distinguish errors in source reading,
+context assembly, authoring or validation, delivery, and customer policy.
 
-## Сравнение моделей и стоимости
+## Comparing models and costs
 
-- До платных запросов зафиксируй одинаковые сценарии и payload hashes, кроме
-  объявленного отличия, порядок, размер выборки, критерии качества, cache policy
-  и один бюджет запросов на всю задачу. По возможности закрепи общий проверенный
-  endpoint; если маршруты различаются, учти это как ограничение сравнения.
-- Учитывай retries, fallback и repairs в этом же бюджете. Не переносить численный
-  лимит или платёжное разрешение из другого проекта.
-- Отделяй реальные списания, provider-reported cost, расчёт по тарифу и неизвестное.
-  Нормализованная оценка и фактическая плата — разные показатели.
-- Учитывай полную стоимость выбранного пути и реальные знаменатели. Несопоставимые
-  cache/routing условия и разные группы трафика не устанавливают рейтинг экономии.
+- Before paid requests, record the scenarios and payload hashes, verifying identical
+  inputs apart from the declared treatment. Predeclare the order, sample size,
+  quality criteria, cache policy, and one request budget for the entire task.
+  Where possible, pin a common reviewed endpoint; if routes differ, record this
+  as a limitation of the comparison.
+- Count retries, fallback, and repairs against the same budget. Do not carry a numerical
+  limit or payment authorization over from another project.
+- Separate actual charges, provider-reported cost, calculations from pricing, and unknowns.
+  A normalized estimate and an actual charge are different metrics.
+- Account for the full cost of the chosen path and the actual denominators. Incomparable
+  cache or routing conditions and different traffic cohorts cannot establish a savings ranking.
 
-## Результат
+## Deliverable
 
-Храни сырые приватные данные в защищённом временном месте только в разрешённой
-области. В итоговый документ и Git попадают обезличенные выводы, методика и
-проверяемые агрегаты, без клиентских диалогов, идентификаторов и секретов.
+Keep raw private data in a protected temporary location only within the authorized
+scope. The final document and Git should contain sanitized findings, methodology,
+and verifiable aggregates, without customer conversations, identifiers, or secrets.
 
-Добавь датированное окно, не стирая предыдущие. Для изменения запиши прежний симптом,
-гипотезу, ревизию/время, ожидаемый эффект, подходящие случаи и противоположный сбой.
-Заверши тем, что улучшилось, что осталось и что должен проверить следующий трафик.
-Не отправляй искусственные сообщения реальным клиентам для аудита.
-Аудит сам по себе не разрешает релиз, новую runtime-схему или смену клиентской политики.
+Add a dated window without erasing earlier ones. For each change, record the earlier symptom,
+hypothesis, revision and time, expected effect, eligible cases, and opposite failure.
+Finish with what improved, what remains, and what the next traffic window must exercise.
+Do not send artificial messages to real customers for an audit.
+An audit alone does not authorize a release, a new runtime design, or a change to customer policy.

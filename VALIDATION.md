@@ -1,28 +1,33 @@
-# Проверка набора
+# Validation record
 
-16 октября 2026, Asia/Almaty.
+16 October 2026, Asia/Almaty.
 
-- Оба SKILL.md прошли штатный quick_validate.py: структура frontmatter и имена корректны.
-- Две независимые проверки сценариев: локальная разработка, повторная финансовая
-  операция без публикации, платное сравнение моделей без доступов, рефакторинг промпта
-  без изменения смысла и повторный live-аудит.
-- Исправлены найденные неоднозначности: commit только в существующем Git;
-  refactor отделён от поиска дефекта; стабильная рубрика аудита сохранена;
-  общая конечная точка не делает бюджет/выборку необязательными;
-  атомарность ограничена локальной записью; отчёт нужен только когда его требует задача.
-- Это анализ инструкций на сценариях, не фактическое выполнение проектов
-  отдельными агентами и не измерение качества будущих ответов Codex.
-- Установщик проверен в изолированной временной папке: preview без записей,
-  установка в пустую среду, корректные ссылки skills, повтор без изменений,
-  защита непустого AGENTS, active override, существующей папки skill и битой ссылки.
-  Также проверена установка поверх пустого AGENTS.
-- На настоящих глобальных путях выполнен только preview. Установка не проводилась.
-- Базовый AGENTS: 8 546 байт. Исходный Lite AGENTS: 47 196 байт.
-- При подготовке изменений исходных приложений, production и настроек Codex не выполнялось.
-- Перед первоначальной публикацией проверены состав файлов и относительные ссылки;
-  машинные пути и подробный инвентарь исходных проектов вынесены из публичного пакета.
-  Публикация набора не выполняет глобальную установку.
+- Both SKILL.md files passed the bundled quick_validate.py: frontmatter structure
+  and names are valid.
+- Two independent scenario reviews covered local development, a repeated financial
+  operation without publication, paid model comparison without access, prompt
+  refactoring without semantic changes, and a repeated live audit.
+- Resolved ambiguities: commits apply only in an existing Git repository;
+  refactoring is separate from defect diagnosis; the stable audit rubric is retained;
+  a shared endpoint does not make the budget or sample optional;
+  atomicity applies to local records; a report is needed only when the task requires one.
+- This was a review of instructions against scenarios, not actual project execution
+  by separate agents or a measurement of future Codex response quality.
+- The installer was checked in an isolated temporary directory: preview without writes,
+  installation into an empty environment, correct skill links, repeat installation
+  without changes, and protection of nonempty AGENTS, an active override, an existing
+  skill directory, and a broken link. Installation over an empty AGENTS was also checked.
+- Only a preview was run against the actual global destinations. No installation was performed.
+- Global AGENTS: 4,882 bytes. Original Lite AGENTS: 47,196 bytes.
+- Preparation did not modify the source applications, production, or Codex settings.
+- Before initial publication, the file inventory and relative links were checked;
+  machine paths and the detailed source-project inventory were removed from the public
+  package. Publishing the playbook does not perform a global installation.
 
-Подключение в новом реальном чате и фактический выбор навыков пока не проверены:
-это следующий шаг после установки. Синтаксическая проверка навыка не доказывает,
-что модель всегда применит каждую инструкцию.
+- The English translation was reviewed for semantic fidelity. Both skill definitions
+  passed validation; all tracked content was checked for remaining Cyrillic, and
+  links and command blocks were verified against the previous version.
+
+Loading instructions in a new real chat and actual skill selection have not been verified:
+that is the next step after installation. A skill passing structural validation does
+not prove that the model will always follow every instruction.

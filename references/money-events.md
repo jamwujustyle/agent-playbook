@@ -1,24 +1,24 @@
-# Когда проект обрабатывает деньги и внешние события
+# When a project handles money and external events
 
-Применяй только к соответствующей области. Конкретные валюты, комиссии, права,
-финансовая модель и разрешение на операции определяются текущим проектом.
+Apply only to the relevant area. Specific currencies, fees, permissions,
+the financial model, and authorization for operations are defined by the current project.
 
-- Храни точные денежные значения в точной десятичной или целочисленной форме.
-  Определи округление; сумма распределения должна сохраняться. Компактный UI
-  не меняет исходную точность доказательств, расчётов и платёжных URI.
-- Проверяй подлинность источника и серверные права до обработки. Секреты разных
-  источников разделяй. Фронтенд и сгенерированный ответ не являются авторитетом.
-- Используй стабильный ID операции и исходное время. Повторная доставка не
-  создаёт повторный эффект; конфликтующие payload с одним ID явно отклоняй.
-- Принятие проверенного доказательства, локальная финансовая запись и выдача прав
-  должны быть атомарны и глобально идемпотентны. Внешняя сеть и локальная БД
-  не образуют одну транзакцию: для разрыва нужен проверяемый reconciliation.
-  Локальная очередь процесса не защищает от другого процесса.
-- Привязывай подтверждение к конкретной операции/счёту. Совпадения суммы,
-  скриншота или публичного хэша недостаточно для атрибуции владельцу.
-- Сохраняй закрытую финансовую историю; исправления проводи отдельными
-  проверяемыми корректировками. Изменения условий и прав оставляют журнал.
-- Запись о переводе не перемещает деньги. Отмечай внешнее действие выполненным
-  только после независимого подтверждения; ручное исключение имеет точную область.
-- Стоимость считай по всему пути: комиссия, сеть, активация, промежуточные
-  переводы, конверсия, инфраструктура и условные расходы. Неизвестное не равно нулю.
+- Store exact monetary values in an exact decimal or integer representation.
+  Define rounding; the total must be preserved when amounts are allocated. Compact UI
+  formatting must not change the original precision of evidence, calculations, or payment URIs.
+- Verify source authenticity and server-side permissions before processing. Keep secrets
+  for different sources separate. The frontend and generated responses are not authoritative.
+- Use a stable operation ID and the original timestamp. Repeated delivery must not
+  cause a repeated effect; explicitly reject conflicting payloads with the same ID.
+- Acceptance of verified evidence, the local financial record, and entitlement grants
+  must be atomic and globally idempotent. An external network and a local database
+  do not form a single transaction: the gap requires verifiable reconciliation.
+  An in-process queue does not protect against another process.
+- Bind confirmation to a specific operation or invoice. A matching amount,
+  a screenshot, or a public hash is insufficient for attribution to an owner.
+- Preserve finalized financial history; make corrections through separate,
+  verifiable adjustments. Changes to terms and entitlements must leave an audit trail.
+- A transfer record does not move money. Mark an external action as completed
+  only after independent confirmation; a manual exception must have an exact scope.
+- Calculate cost across the entire path: fees, network costs, activation, intermediate
+  transfers, conversion, infrastructure, and conditional expenses. Unknown does not mean zero.

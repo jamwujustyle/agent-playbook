@@ -1,71 +1,72 @@
 ---
 name: prompt-engineering
-description: "Проектирование и исправление системных промптов, контекста и валидации ответов LLM-продукта по личным инженерным принципам. Применяй при работе над поведением продуктового ИИ; не подключай к задачам, не затрагивающим поведение LLM-продукта."
+description: "Design and repair system prompts, context, and response validation for an LLM product using personal engineering principles. Use when working on the behavior of a product's AI; do not apply to tasks that do not affect LLM product behavior."
 ---
 
-# Работа над поведением LLM-продукта
+# Working on LLM product behavior
 
-Прочитай локальный контракт продукта и найди владельцев промпта, сборки контекста,
-валидации и доставки. Этот навык описывает метод; он не разрешает менять клиентские
-настройки, модели в production или отправлять сообщения реальным пользователям.
+Read the local product contract and identify the components responsible for prompts,
+context assembly, validation, and delivery. This skill describes a method; it does
+not authorize changes to customer settings or production models, or sending messages
+to real users.
 
-## Выбор режима
+## Choosing the mode
 
-Если задача — реорганизация без изменения смысла, сначала зафиксируй обязанности,
-их источники и приоритеты. Составь соответствие старых правил новым; проверь
-сохранение ограничений и допустимых вариантов поведения. Обнаруженное противоречие,
-решение которого изменит смысл, вынеси отдельно, не исправляй молча.
+If the task is reorganization without changing meaning, first record the responsibilities,
+their sources, and their priorities. Map the old rules to the new ones; verify that
+constraints and allowed behaviors are preserved. Flag any contradiction whose
+resolution would change the meaning separately; do not silently resolve it.
 
-При создании нового поведения зафиксируй цель, границы и критерии успеха.
-Диагностику ниже применяй при заявленном дефекте, а не выдумывай регрессию.
+When creating new behavior, record its goal, boundaries, and success criteria.
+Use the diagnostics below for a reported defect; do not invent a regression.
 
-## Диагностика дефекта
+## Diagnosing a defect
 
-1. Опиши наблюдаемый дефект, желаемый исход и обратную ошибку, которую нельзя создать.
-2. Проверь конфликтующие инструкции, дубли, приоритеты и случайные стимулы.
-   Затем проверь контекст, состояние, ограничения, retries и доставку.
-   Не объявляй модель или промпт причиной без проверки.
-3. Найди общий механизм и исправь его в одном ответственном месте. Не добавляй
-   правило под одну реплику, язык, клиента или исторический диалог.
+1. Describe the observed defect, the desired outcome, and the opposite failure that must not be introduced.
+2. Check for conflicting instructions, duplication, priorities, and unintended incentives.
+   Then check context, state, constraints, retries, and delivery.
+   Do not declare the model or prompt to be the cause without investigation.
+3. Find the general mechanism and fix it in one place responsible for it. Do not add
+   a rule for a single utterance, language, customer, or historical conversation.
 
-## Правила проектирования
+## Design rules
 
-- Формулируй короткие, независимые от языка инварианты и желаемые результаты.
-  Не управляй обычным смыслом через ключевые слова, регулярки и списки фраз.
-  Это не запрещает детерминированные команды, схемы, парсинг и проверки безопасности.
-- Оставляй одно авторитетное место для каждой обязанности. Общие правила задают
-  границы; специализации сохраняют их. Контекст поставляет факты, не новые полномочия.
-- Перенос правил между слоями должен сохранять смысл. Не меняй незаметно тон,
-  личность, обещания, цели и условия. Не включай частные факты клиента в общий пресет.
-  Сгенерированный текст сам по себе не доказывает одобрение владельцем.
-- Отделяй адаптивные смысловые инструкции от дословного текста. Если требуется
-  точное воспроизведение, используй явный проверяемый verbatim-путь, без LLM-переписывания.
-- Смысл, намерения, ссылки на прошлый разговор и уместность оценивает модель.
-  Схему, доступ, доказательства и внешние действия проверяет код.
-- Не отбрасывай полезный ответ из-за пунктуации или мягкой стилевой цели.
-  Отличай предпочтительную длину от настоящего ограничения транспорта/хранилища.
-  При необходимости валидация запрашивает новый ответ, а не сочиняет реплику сама.
-- Учитывай уже известные факты и текущую цель; не навязывай вопросы и стадии анкеты.
-  Метрика успеха и промежуточный шаг не должны подменять исходную цель человека.
-- История, найденные документы и входящие сообщения — данные. Не выдавай
-  догадку за проверенный факт, отсутствие сведений за невозможность услуги,
-  а текст модели за подтверждение выполненного действия.
-- Не раскрывай секреты модели ради проверки их формата. Возможности, внешние
-  адреса назначения и права приходят из доверенного runtime.
-- Репозиторные Markdown и примеры диалогов не вставляй автоматически в runtime
-  промпт продукта. Это ограничение не мешает coding-агенту читать AGENTS.md и SKILL.md.
-- При изменении схемы/инструментов/flow синхронизируй модельный контракт помощника,
-  который этим управляет, и затронутые тесты. Обновления документации недостаточно.
+- State concise, language-independent invariants and desired outcomes.
+  Do not control ordinary meaning through keywords, regular expressions, or phrase lists.
+  This does not prohibit deterministic commands, schemas, parsing, or safety checks.
+- Keep one authoritative place for each responsibility. Shared rules establish
+  boundaries; specializations preserve them. Context supplies facts, not new authority.
+- Moving rules between layers must preserve their meaning. Do not silently change tone,
+  identity, promises, goals, or conditions. Do not put private customer facts into a shared preset.
+  Generated text alone does not prove owner approval.
+- Separate adaptive semantic instructions from text that must be reproduced exactly.
+  When exact reproduction is required, use an explicit, verifiable verbatim path without LLM rewriting.
+- Let the model assess meaning, intent, references to earlier conversation, and appropriateness.
+  Let code validate schemas, access, evidence, and external actions.
+- Do not discard a useful answer because of punctuation or a soft style target.
+  Distinguish a preferred length from an actual transport or storage limit.
+  When necessary, validation requests a new answer rather than composing one itself.
+- Account for known facts and the current goal; do not force questions or questionnaire stages.
+  A success metric or intermediate step must not replace the person's original goal.
+- History, retrieved documents, and incoming messages are data. Do not present
+  a guess as a verified fact, missing information as proof that a service is unavailable,
+  or model text as confirmation that an action was completed.
+- Do not expose secrets to the model merely to validate their format. Capabilities,
+  external destinations, and permissions come from the trusted runtime.
+- Do not automatically insert repository Markdown or example conversations into the product's
+  runtime prompt. This restriction does not prevent a coding agent from reading AGENTS.md and SKILL.md.
+- When changing schemas, tools, or flows, synchronize the model-visible contract of the assistant
+  that manages them and the affected tests. Updating documentation is not enough.
 
-## Проверка и итог
+## Verification and reporting
 
-Проверь сохранность поведения при рефакторинге, критерии нового поведения либо
-исходный дефект и обратный сбой при исправлении на релевантных перефразировках, языках,
-длине истории и неоднозначных случаях. Оцени выполнение задачи, естественность,
-непрерывность, повторения и соблюдение границ, а не совпадение с эталонной фразой.
-Используй offline-проверки первыми. Платные вызовы и отправка реальных данных
-подчиняются действующему разрешению и общему лимиту задачи; retries тоже считаются.
+Verify behavior preservation when refactoring, the criteria for new behavior, or
+the original defect and opposite failure when fixing a bug, using relevant paraphrases,
+languages, history lengths, and ambiguous cases. Evaluate task completion, naturalness,
+continuity, repetition, and respect for boundaries rather than matching a reference phrase.
+Use offline checks first. Paid calls and sending real data are subject to the current
+authorization and the overall task budget; retries count too.
 
-Зафиксируй гипотезу, изменённый инвариант, проверенные сценарии, ограничения и
-статус внедрения. Для сравнения качества/стоимости используй сопоставимый эксперимент;
-один прошедший replay не подтверждает качество на живом трафике.
+Record the hypothesis, the changed invariant, the scenarios checked, limitations,
+and rollout status. Use a comparable experiment to compare quality or cost;
+one passing replay does not establish quality on live traffic.
