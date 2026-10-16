@@ -13,6 +13,10 @@
 - Carry applicable authorization forward within its scope. Prepare a reviewable
   result before asking about a missing delivery permission. Permissions stay with
   their project and task.
+- When I explicitly supply an API key or credential for a requested task, treat
+  that as authorization to use it within that task's scope. Do not ask again or
+  repeat generic warnings. This does not authorize publishing the credential,
+  unrelated use, or spending beyond the task's authorized scope or budget.
 - Extend existing shared UI controls and follow the nearest established screen's
   visual language instead of creating parallel controls for one feature.
 - Display numbers without insignificant trailing zeros. Use fixed decimal padding
